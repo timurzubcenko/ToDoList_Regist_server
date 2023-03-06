@@ -18,13 +18,13 @@ router.post('/registration', checkRegist, async (req, res) => {
         const { login, name, password } = req.body
 
 
-        // const errors = validationResult(req)
-        // if (!errors.isEmpty()) {
-        //     return res.status(400).json({
-        //         errors: errors.array(),
-        //         msg: "Некоректные данные при регистрации"
-        //     })
-        // }
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                errors: errors.array(),
+                msg: "Некоректные данные при регистрации"
+            })
+        }
 
 
         const isUsed = await User.findOne({ login })
@@ -57,13 +57,13 @@ router.post('/login', checkLogin, async (req, res) => {
 
         const { login, password } = req.body
 
-        // const errors = validationResult(req)
-        // if (!errors.isEmpty()) {
-        //     return res.status(400).json({
-        //         errors: errors.array(),
-        //         msg: "Некоректные данные при регистрации"
-        //     })
-        // }
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                errors: errors.array(),
+                msg: "Некоректные данные при регистрации"
+            })
+        }
 
         //Поиск User
         const user = await User.findOne({ login })
